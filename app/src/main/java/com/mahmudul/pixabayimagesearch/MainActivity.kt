@@ -1,11 +1,28 @@
 package com.mahmudul.pixabayimagesearch
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.runtime.Composable
+import com.mahmudul.pixabayimagesearch.ui.components.MainContent
+import com.mahmudul.pixabayimagesearch.ui.theme.PixabayImageSearchTheme
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContent {
+            PixabayImageSearchTheme {
+                MyApp {
+                    MainContent()
+                }
+            }
+        }
     }
+}
+
+@Composable
+fun MyApp(content: @Composable ()->Unit) {
+    content()
 }
