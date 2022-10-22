@@ -1,5 +1,6 @@
 package com.mahmudul.pixabayimagesearch.di
 
+import com.mahmudul.pixabayimagesearch.network.repository.MainRepository
 import com.mahmudul.pixabayimagesearch.network.service.ApiService
 import com.mahmudul.pixabayimagesearch.util.Constant
 import dagger.Module
@@ -22,4 +23,8 @@ object HiltModules {
             .create(ApiService::class.java)
     }
 
+    @Provides
+    fun provideMainRepository(apiService: ApiService): MainRepository {
+        return MainRepository(apiService = apiService)
+    }
 }
