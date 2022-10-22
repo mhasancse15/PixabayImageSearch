@@ -18,10 +18,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberImagePainter
-import androidx.compose.ui.unit.dp
 import com.mahmudul.pixabayimagesearch.network.model.Hit
+import timber.log.Timber
+
 
 @OptIn(ExperimentalFoundationApi::class)
 @Preview
@@ -49,7 +51,7 @@ fun MainContent(viewModel: MainViewModel = hiltViewModel()) {
             )
 
             if (result.isLoading) {
-                Log.d("TAG", "MainContent: in the loading")
+                Timber.tag("TAG").d("MainContent: in the loading");
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -59,7 +61,7 @@ fun MainContent(viewModel: MainViewModel = hiltViewModel()) {
             }
 
             if (result.error.isNotBlank()) {
-                Log.d("TAG", "MainContent: ${result.error}")
+                Timber.tag("TAG").d("MainContent: ${result.error}");
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -72,7 +74,7 @@ fun MainContent(viewModel: MainViewModel = hiltViewModel()) {
             }
 
             if (result.data.isNotEmpty()) {
-                Log.d("TAG", "MainContent: Your Token")
+                Timber.tag("TAG").d("MainContent: data list size  ${result.data.size}");
                 LazyVerticalGrid(
                     columns = GridCells.Adaptive(minSize = 128.dp)
                 ){
@@ -84,6 +86,7 @@ fun MainContent(viewModel: MainViewModel = hiltViewModel()) {
         }
     }
 }
+
 
 @Composable
 fun MainContentItem(hit: Hit) {
